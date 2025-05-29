@@ -5,24 +5,24 @@ const register = promClient.register;
 var app = express();
 
 const counter = new promClient.Counter({
-  name: 'aula_request_total',
+  name: 'teste_request_total',
   help: 'Contador de requests',
   labelNames: ['statusCode']
 });
 
 const gauge = new promClient.Gauge({ 
-    name: 'aula_free_bytes', 
+    name: 'teste_free_bytes', 
     help: 'Exemplo de gauge' 
 });
 
 const histogram = new promClient.Histogram({
-  name: 'aula_request_time_seconds',
+  name: 'teste_request_time_seconds',
   help: 'Tempo de resposta da API',
   buckets: [0.1, 0.2, 0.3, 0.4, 0.5],
 });
 
 const summary = new promClient.Summary({
-  name: 'aula_summary_request_time_seconds',
+  name: 'teste_summary_request_time_seconds',
   help: 'Tempo de resposta da API',
   percentiles: [0.5, 0.9, 0.99],
 });
