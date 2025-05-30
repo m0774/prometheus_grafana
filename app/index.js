@@ -18,13 +18,13 @@ const gauge = new promClient.Gauge({
 const histogram = new promClient.Histogram({
   name: 'teste_request_time_seconds',
   help: 'Tempo de resposta da API',
-  buckets: [0.1, 0.2, 0.3, 0.4, 0.5],
+  // buckets: [0.1, 0.2, 0.3, 0.4, 0.5],
 });
 
 const summary = new promClient.Summary({
   name: 'teste_summary_request_time_seconds',
   help: 'Tempo de resposta da API',
-  percentiles: [0.5, 0.9, 0.99],
+  percentiles: [0.5, 0.9, 0.99], // <- %
 });
 
 app.get('/', function(req, res) {
@@ -43,4 +43,4 @@ app.get('/metrics', async function(req,res){
     res.end(await register.metrics());
 })
 
-app.listen(3000);
+app.listen(3030);
