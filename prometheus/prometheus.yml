@@ -12,10 +12,11 @@ scrape_configs:
 - job_name: aula
   static_configs:
   - targets:
-    - 192.168.0.101:3030
+    - 192.168.0.102:3030
 - job_name: servidor
   static_configs:
   - targets:
-    - 192.168.0.101:9182
+    - 192.168.0.102:9182
 
     # docker run --name prometheus -d -p 9090:9090 -v C:\Projetos\prometheus_grafana\prometheus\prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+    # docker run -d --name=grafana -p 3000:3000 grafana/grafana-enterprise
