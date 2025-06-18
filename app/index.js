@@ -22,31 +22,28 @@ const tempoDeResposta = new promClient.Histogram({
 
 var zeraUsuariosLogados = false;
 
-function randn_bm(min, max, skew) {
+function randn_bm(min, max, skew) { 
 	var u = 0, v = 0;
-	while (u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+	while (u === 0) u = Math.random()
 	while (v === 0) v = Math.random();
 	let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
 
-	num = num / 10.0 + 0.5; // Translate to 0 -> 1
-	if (num > 1 || num < 0) num = randn_bm(min, max, skew); // resample between 0 and 1 if out of range
-	num = Math.pow(num, skew); // Skew
-	num *= max - min; // Stretch to fill range
-	num += min; // offset to min
+	num = num / 10.0 + 0.5; 
+	if (num > 1 || num < 0) num = randn_bm(min, max, skew); 
+	num = Math.pow(num, skew); 
+	num *= max - min; 
+	num += min; 
 	return num;
 }
 
 setInterval(() => {
-	// Incrementa contador de requisições
 	var taxaDeErro = 5;
 	var statusCode = (Math.random() < taxaDeErro/100) ? '500' : '200';
 	contadorRequisicoes.labels(statusCode).inc();
 
-	// Atualiza gauge de usuários logados
 	var usuariosLogados = (zeraUsuariosLogados) ? 0 : 500 + Math.round((50 * Math.random()))
 	usuariosOnline.set(usuariosLogados);
 
-	// Observa tempo de resposta
 	var tempoObservado = randn_bm(0, 3, 4);
 	tempoDeResposta.observe(tempoObservado);
 }, 150);
