@@ -1,13 +1,15 @@
-version: '3'
+version: '3.8'
+
 volumes:
   grafana-storage:
   prometheus:
 services:
   prometheus:
     image: prom/prometheus
-    command: ["--config.file=/prometheus-data/prometheus.yml"]
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
     volumes:
-      - ./prometheus-data:/prometheus-data
+      - ./prometheus-data:/etc/prometheus
       - prometheus:/prometheus
     ports:
       - 9090:9090
